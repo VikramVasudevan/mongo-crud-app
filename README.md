@@ -10,3 +10,4 @@ Things to do before you have a working application:
 > npm install
 3. Replace logo.png with your brand logo.
 4. Add and maintain your schema files under shared_modules/mongodb/models/ directory. Please refer to the test_collection1.js for example.
+5. Modify getMasterDataEntityList function in service.js under routes/masterData/ directory to configure all the master data you want to edit using this application.
