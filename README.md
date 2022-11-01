@@ -1,4 +1,4 @@
-# Mongo-CRUD-App-Admin-Module
+# Mongo CRUD App
 
 This application is used to maintain data in a mongo DB. 
 
