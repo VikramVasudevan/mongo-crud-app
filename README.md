@@ -20,4 +20,4 @@ Hope you enjoy this app.
 Feedback is always welcome.
 
 
-@copyright 2022 Ekahaa Solutions. All Rights Reserved.
+&copy;copyright 2022 Ekahaa Solutions. All Rights Reserved.
