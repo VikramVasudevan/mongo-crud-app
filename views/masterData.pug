@@ -1,0 +1,62 @@
+html
+  include includes/head.pug
+  body
+    div.container-fluid.main
+        include includes/top-nav.pug
+        br
+        div.d-flex.flex-row.justify-content-between.data-container
+            div.h-100.d-flex.flex-column.flex-shrink-0.p-3.text-bg-dark.data-left-nav(style="width: 280px;")
+                span.fs-4 Master Data Entities
+                hr
+                ul.nav.nav-pills.flex-column.mb-auto
+                    each entity in entities
+                        li.nav-item(id=entity)
+                            a(href="/admin/masterData/web/view/" + entity, class={"active" : subtitle == entity}).nav-link.text-white
+                                i.fa.fa-database.text-secondary
+                                span  #{entity}
+            if masterDataEntityName
+                div.h-100.container-fluid.flex-shrink-0.data-viewer
+                    div.d-flex.flex-row.justify-content-end
+                        a.btn.btn-lg.btn-secondary(href="/admin/masterData/api/downloadTemplate/" + masterDataEntityName+ "?" + queryParamsRaw) 
+                            i.fa.fa-download
+                            span &nbsp; Download Template
+
+                        button.btn.btn-lg.btn-primary(onClick="showBulkUploadDialog('"+masterDataEntityName+"')") 
+                            i.fa.fa-upload
+                            span &nbsp; Bulk Upload
+
+                        button.btn.btn-lg.btn-info(onClick="showEditDialog('"+masterDataEntityName+"', " + JSON.stringify(columns) + ", undefined,'add')")
+                            i.fa.fa-plus
+                            span &nbsp; Add Record
+                    br
+                    if data && data.length > 0
+                        form(id="filterForm")
+                            table.table.table-striped.table-bordered.table-hover
+                                thead.thead-dark
+                                    tr.bg-dark.text-white
+                                        each column in columns 
+                                            th 
+                                                span #{column} 
+                                tbody
+                                    tr
+                                        each column in columns 
+                                            td
+                                                div.form-outline.d-flex.flex-row.justify-content-center
+                                                    i.fa.fa-filter
+                                                    input.submit-on-enter.form-control(id=column, placeholder="Filter", name=column, value=queryParams[column])
+                                    each row in data
+                                        tr(onClick="showEditDialog('"+masterDataEntityName+"', " + JSON.stringify(columns) + ", " + JSON.stringify(row) + ",'edit')")
+                                            each column in columns 
+                                                td #{row[column]} 
+                    else
+                        div.d-flex.flex-row.justify-content-center
+                            h2.text-danger No data found
+            else 
+                div.h-100.container-fluid.flex-shrink-0.data-viewer
+                    div.h-100.d-flex.flex-row.justify-content-center.align-items.center
+                        h2.text-danger Please select an entity
+    script.
+        setupEvents();
+        var masterDataEntityName = "#{masterDataEntityName ? masterDataEntityName:''}";
+        if(masterDataEntityName != "")
+            document.getElementById(masterDataEntityName).scrollIntoView()

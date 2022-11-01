@@ -1,0 +1,117 @@
+mixin parseObject(element, data)
+    br
+    if !element.isParentArray
+        div(class=element.absolutePath).card.overflow-auto.data-viewer.txn-element-card
+            div.card-header
+                div.d-flex.justify-content-between 
+                    h5.p-1 #{element.absolutePath}
+                    div
+                        div.d-flex.justify-content-between
+                            if element.children
+                                button.btn.btn-primary
+                                    i.fa.fa-plus
+                                    span   Add
+                            button.btn.btn-secondary
+                                i.fa.fa-save 
+                                span   Save
+                span.p-1.text-warning {#{element.type}}
+            div.card-body
+                div.card-text
+                    pre #{JSON.stringify(getElement(data, element.absolutePath),null,4)}
+                    if element.children
+                        table.txn-data-table.table-striped.table-hover.table-bordered
+                            thead.thead-dark
+                                tr.bg-dark.text-white
+                                    each child in element.children 
+                                        th.p-3 
+                                            +parseObject(child, data)
+                            tbody
+                    else
+                        if !element.isParentArray
+                            div.form-group
+                                input(name=element.absolutePath, placeholder=element.absolutePath value=getElement(data, element.absolutePath)).form-control
+    else
+        span #{element.absolutePath}
+
+html
+  include includes/head.pug
+  body
+    div.container-fluid.main
+        include includes/top-nav.pug
+        br
+        div.d-flex.flex-row.justify-content-between.data-container
+            div.h-100.d-flex.flex-column.flex-shrink-0.p-3.text-bg-dark.data-left-nav(style="width: 280px;")
+                span.fs-4 Transactional Data Entities
+                hr
+                ul.nav.nav-pills.flex-column.mb-auto
+                    each entity in entities
+                        li.nav-item
+                            a(href="/admin/txData/web/view/" + entity.name, class={"active" : subtitle == entity}).nav-link.text-white
+                                i.fa.fa-database.text-secondary
+                                span(title=entity.desc)  #{entity.displayName}
+            if transactionalDataEntityName
+                div.data-viewer.container-fluid
+                    form(id="editForm")                
+                        // pre #{JSON.stringify(metadata,null,4)}             
+                        br
+                        if metadata   
+                            div.card
+                                div.card-header.bg-dark.text-white
+                                    h5 Search
+                                div.card-body
+                                    div.card-text
+                                        div.container.d-flex.flex-row.justify-content-around
+                                            each attr in metadata.attributes 
+                                                if attr.filter 
+                                                    div.form-group
+                                                        input(name="fil-"+attr.name, placeholder=attr.displayName, value=queryString["fil-"+attr.name]).form-control
+                                                    br
+                                            input(id="_skip", type="hidden", name="skip" value=skip)
+                                            input(id="_limit", type="hidden", name="limit" value=limit)
+                                            button.btn.btn-primary.btn-lg(id="_searchBtn")
+                                                i.fa.fa-lg.fa-search 
+                                                span   Search
+                        else   
+                            h2.text-danger 
+                                i.fa.fa-lg.fa-warning
+                                span Unknown Entity
+                        br
+                        if data && JSON.stringify(data) != '{}'
+                            h2.d-flex.flex-row.justify-content-between 
+                                button.btn.btn-lg.btn-dark(disabled = (skip == 0)?"disabled":undefined, onclick="paginationPrev()") 
+                                    i.fa.fa-lg.fa-backward
+                                    span  prev
+                                span 
+                                    span Edit Attributes 
+                                    span.text-warning (Record #{(skip + limit)} of #{numRows})                       
+                                button.btn.btn-lg.btn-dark(disabled = (skip + limit >= numRows)?"disabled":undefined, onclick="paginationNext()")
+                                    i.fa.fa-lg.fa-forward
+                                    span  next
+                            hr                    
+                            if formElements && formElements.length > 0
+                                div.container
+                                    br
+                                    div.alert.alert-secondary 
+                                        h3 
+                                            span.text-primary ID = #{data._id} 
+                                    br
+                                    table.table.table-bordered.table-striped.table-hover
+                                        tbody
+                                            each element in formElements
+                                                tr(onclick="onTxnAttributeChange('" + transactionalDataEntityName + "'," + JSON.stringify(element) + "," + JSON.stringify(formElements) + "," + JSON.stringify(data) + "," + JSON.stringify(filter) + ");")
+                                                    th  #{element.absolutePath}
+                                                    td 
+                                                        pre.tx-data #{JSON.stringify(getElement(data, element.absolutePath),null,3)}
+                            else
+                                div.d-flex.flex-row.justify-content-center
+                                    h2.text-danger No form elements found
+                        else 
+                            div.d-flex.flex-row.justify-content-center
+                                h2.text-danger No data found
+
+            else 
+                div.h-100.container-fluid.flex-shrink-0.data-viewer
+                    div.h-100.d-flex.flex-row.justify-content-center.align-items.center
+                        h2.text-danger Please select an entity
+    script.
+        setupEvents();

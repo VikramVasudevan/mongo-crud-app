@@ -1,0 +1,39 @@
+nav.navbar.navbar-dark.bg-light
+    ol.breadcrumb
+        li.breadcrumb-item.active
+            a(href="/") Home
+        li.breadcrumb-item
+            a(href="/admin/reports/web/view") Reports
+        li.breadcrumb-item
+            a(href="/admin/masterData/web/view") Master Data Management
+        li.breadcrumb-item
+            a(href="/admin/txData/web/view") Transactional Data Management
+        if subtitle 
+            li.breadcrumb-item.active
+                i.fa.fa-database.text-secondary
+                span.text-secondary  #{subtitle} 
+                if numRows && numRows > 0
+                    span.text-secondary  (#{numRows} record#{numRows > 1?"s":""})
+                else 
+                    span.text-danger (no records found)
+        if report 
+            li.breadcrumb-item.active
+                i.fa.fa-table.text-secondary
+                span.text-secondary  #{report.displayName} 
+                if numRows && numRows > 0
+                    span.text-secondary  (#{numRows} record#{numRows > 1?"s":""})
+                else 
+                    span.text-danger (no records found)
+    div.d-flex.flex-row.justify-content-center.align-items-center
+        img(src="/img/logo.jpeg").header-logo
+        h5 &nbsp; #{title}
+        if subtitle
+            h5.text-primary   
+                span &nbsp; | 
+                i.fa.fa-database.text-primary
+                span  #{subtitle}
+        if report
+            h5.text-primary   
+                span &nbsp; | 
+                i.fa.fa-table.text-primary
+                span  #{report.displayName}

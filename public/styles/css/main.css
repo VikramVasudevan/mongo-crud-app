@@ -1,0 +1,110 @@
+body {
+    padding: 20px;
+}
+
+table {
+    width: 90vw;
+    max-width: 90vw;
+    margin: 0 auto;
+}
+
+table.txn-data-table {
+    width: auto;
+    max-width: 90vw;
+    margin: 0 auto;
+}
+
+html {
+    font-size: 0.8rem;
+}
+
+
+pre {
+    max-width: 1000px;
+    max-height: 250px;
+}
+
+pre.tx-data {
+    max-width : 600px;
+    max-height : 200px;
+    overflow : auto;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+div.main {
+    height : 95vh;
+}
+
+.title {
+    text-transform: uppercase;
+}
+
+table>thead>tr>th {
+    padding : 30px !important;
+    min-width : 200px;
+    text-transform: uppercase;
+}
+
+table>tbody>tr {
+    cursor : pointer;
+}
+
+.header-logo {
+    width : auto;
+    height : 30px;
+}
+
+.data-container {
+    height : 80vh;
+}
+
+.data-container>.data-left-nav {
+    overflow : auto;
+    max-width : 20vw;
+}
+.data-container>.data-viewer {
+    overflow : auto;
+    max-width : 80vw;
+}
+
+.d-flex {
+    gap: 10px;
+}
+
+.txn-element-card {
+    min-width : 400px
+}
+
+.attr-select {
+    width : 400px !important;
+}
+
+.tx-edit-attr-container {
+    max-height : 500px;
+    overflow: auto;
+}
+
+.swal-dialog-wide {
+    width : 1000px !important;
+}
+
+.swal-dialog-medium-wide {
+    width : 500px !important;
+}

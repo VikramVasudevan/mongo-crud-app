@@ -1,0 +1,57 @@
+html
+  include includes/head.pug
+  body
+    div.container-fluid.main
+        include includes/top-nav.pug
+        br
+        div.d-flex.flex-row.justify-content-between.data-container
+            div.h-100.d-flex.flex-column.flex-shrink-0.p-3.text-bg-dark.data-left-nav(style="width: 280px;")
+                span.fs-4 Reports
+                hr
+                ul.nav.nav-pills.flex-column.mb-auto
+                    each currReport in reports
+                        li.nav-item
+                            a(href="/admin/reports/web/view/" + currReport.reportName, class={"active" : report && report.name == currReport.reportName}).nav-link.text-white
+                                i.fa.fa-table.text-secondary
+                                span  &nbsp;&nbsp; #{currReport.displayName}
+            if report && report.name
+                div.h-100.container-fluid.flex-shrink-0.data-viewer
+                    div.d-flex.flex-row.justify-content-between
+                        h5.text-secondary #{report.desc}
+                        a.btn.btn-lg.btn-primary(href="/admin/reports/api/download/" + report.name) 
+                            i.fa.fa-download
+                            span &nbsp; Download Report
+
+                    br
+                    if data && data.length > 0
+                        form(id="filterForm")
+                            table.table.table-striped.table-bordered.table-hover
+                                thead.thead-dark
+                                    tr.bg-dark.text-white
+                                        each column in columns 
+                                            th 
+                                                span #{column} 
+                                tbody
+                                    tr
+                                        each column in columns 
+                                            td
+                                                div.form-outline.d-flex.flex-row.justify-content-center
+                                                    i.fa.fa-filter
+                                                    input.submit-on-enter.form-control(id=column, placeholder="Filter", name=column, value=queryParams[column])
+                                    each row in data
+                                        tr
+                                            each column in columns 
+                                                td 
+                                                    if(typeof row[column] == 'object')
+                                                        pre #{JSON.stringify(row[column],null,2)}
+                                                    else 
+                                                        span #{row[column]}
+                    else
+                        div.d-flex.flex-row.justify-content-center
+                            h2.text-danger No data found
+            else 
+                div.h-100.container-fluid.flex-shrink-0.data-viewer
+                    div.h-100.d-flex.flex-row.justify-content-center.align-items.center
+                        h2.text-danger Please select a report
+    script.
+        setupEvents();

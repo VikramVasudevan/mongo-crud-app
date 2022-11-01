@@ -1,3 +1,3 @@
-# eCOPSV2-Admin-Module
+# Mongo-CRUD-App-Admin-Module
 
-Admin module for ecopsv2# mongo-crud-app
+Admin module for mongo-crud-app
