@@ -12,7 +12,8 @@ Things to do before you have a working application:
 4. Add and maintain your schema files under `shared_modules/mongodb/models/` directory. Please refer to the `test_collection1.js` for example.
 5. Modify `getMasterDataEntityList` function in `service.js` under `routes/masterData/` directory to configure all the master data you want to edit using this application.
 6. Use `Dockerfile` and build your own docker image
-7. Voila! you are all set!
+7. OR to run this app locally, run the command `npm start` from the root of this project.
+8. Voila! you are all set!
 
 
 Hope you enjoy this app.
