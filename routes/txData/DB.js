@@ -1,4 +1,4 @@
-const mongo_crud_app_shared_modules = require('mongo_crud_app_shared_modules');
+const mongo_crud_app_shared_modules = require('../../shared_modules');
 const mongoose = require('mongoose');
 
 const getModel = (collection) => {

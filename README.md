@@ -9,3 +9,4 @@ Things to do before you have a working application:
 2. run the following command from the root folder of this project to install all dependencies.
 > npm install
 3. Replace logo.png with your brand logo.
+4. Add and maintain your schema files under shared_modules/mongodb/models/ directory. Please refer to the test_collection1.js for example.
