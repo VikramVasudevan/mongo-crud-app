@@ -1,6 +1,6 @@
 # Mongo CRUD App
 
-This application is used to maintain data in a mongo DB. 
+This application has been developed by Ekahaa Solutions and is used to maintain data in a mongo DB. 
 
 It has pre-built screens that help perform CRUD operations on the Mongo DB.
 
