@@ -18,3 +18,6 @@ Things to do before you have a working application:
 Hope you enjoy this app.
 
 Feedback is always welcome.
+
+
+@copyright 2022 Ekahaa Solutions. All Rights Reserved.
