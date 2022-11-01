@@ -19,5 +19,6 @@ Hope you enjoy this app.
 
 Feedback is always welcome.
 
+![Ekahaa Solutions India Pvt Ltd.](/public/img/logo.png "Ekahaa Solutions India Pvt Ltd.")
 
-&copy;copyright 2022 Ekahaa Solutions. All Rights Reserved.
+&copy;copyright 2022 Ekahaa Solutions India Pvt Ltd. All Rights Reserved.
