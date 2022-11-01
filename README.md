@@ -1,3 +1,6 @@
 # Mongo-CRUD-App-Admin-Module
 
-Admin module for mongo-crud-app
+This application is used to maintain data in a mongo DB. 
+
+It has pre-built screens that help perform CRUD operations on the Mongo DB.
+
